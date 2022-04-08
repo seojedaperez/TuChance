@@ -1,0 +1,44 @@
+﻿@model TuChanceTest_ASP.Net_Core_3_1.Models.Survey
+@{
+    ViewData["Title"] = "Create Survey";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<section class="section">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Detail">Back to List</a>
+    </div>
+    @if (TempData["successMessage"] != null)
+    {
+        <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show" role="alert">
+            @TempData["successMessage"]
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["errorMessage"] != null)
+    {
+        <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+            @TempData["errorMessage"]
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+</section>
+    

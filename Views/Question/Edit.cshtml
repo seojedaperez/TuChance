@@ -1,0 +1,63 @@
+﻿@model TuChanceTest_ASP.Net_Core_3_1.Models.SurveyQuestion
+
+@{
+    ViewData["Title"] = "Edit Question";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<section class="section">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="IdQuestion" value="@Model.IdQuestion" type="hidden" />
+                <div class="form-group">
+                    <label asp-for="IdSurvey" class="control-label"></label>
+                    @if (!String.IsNullOrEmpty(ViewBag.Surveys))
+                    {
+                        <select asp-for="IdSurvey" class="form-control" asp-items="@(new SelectList(ViewBag.Surveys, "IdSurvey", "Name"))">
+                            <option value="">-- Select Survey --</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select asp-for="IdSurvey" class="form-control">
+                            <option value="">-- Select Survey --</option>
+                        </select>
+                    }
+                    <span asp-validation-for="IdSurvey" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Question" class="control-label"></label>
+                    <input asp-for="Question" class="form-control" />
+                    <span asp-validation-for="Question" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Detail">Back to List</a>
+    </div>
+    @if (TempData["successMessage"] != null)
+    {
+        <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show" role="alert">
+            @TempData["successMessage"]
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["errorMessage"] != null)
+    {
+        <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+            @TempData["errorMessage"]
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+</section>

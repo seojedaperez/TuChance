@@ -1,0 +1,101 @@
+﻿@model TuChanceTest_ASP.Net_Core_3_1.Models.Answers
+
+
+@{
+    ViewData["Title"] = "Answers";
+}
+<h1>@ViewData["Title"]</h1>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AnswerList[0].Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AnswerList[0].Question)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AnswerList[0].Answer)
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.AnswerList != null)
+                            {
+                                @foreach (var item in Model.AnswerList)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Question
+                                        </td>
+                                        <td>
+                                            @item.Answer
+                                        </td>
+                                        <td>
+                                            <form asp-action="Delete" asp-route-id="@item.IdQuestion">
+                                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body">
+                        <h5 class="card-title">Take a Survey</h5>
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.AnswerList[0].Name)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.SurveysAvailables != null)
+                                {
+                                    @foreach (var item in ViewBag.SurveysAvailables)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <button class="btn btn-primary w-100" onclick="location.href='@Url.Action("TakeSurvey", "Home", new {IdSurvey=item.IdSurvey })'">@item.Name</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (TempData["errorMessage"] != null)
+                    {
+                        <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                            @TempData["errorMessage"]
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+</section>
